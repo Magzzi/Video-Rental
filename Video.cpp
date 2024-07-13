@@ -17,7 +17,20 @@ Video::~Video() {
 
 void Video::insertVideo(const std::string &movieTitle, const std::string &movieGenre, const std::string &movieProd, int copies) {
     // TODO: Logic to insert a new video node into the linked list
+    
+    // check if movie already exist
 
+    Node* current = head;
+    while (current != nullptr) {
+        if (current->title == movieTitle) {
+            // Movie already exists, increment the number of copies
+            current->numberOfCopies += copies;
+            return;
+        }
+        current = current->next;
+    }
+
+    // if not
     static int videoIDCounter = 1; // to keep in memory
 
 
@@ -84,10 +97,13 @@ void Video::showVideoDetails(int id) const {
             cout << "Genre: " << current->genre << endl;
             cout << "Production: " << current->production << endl;
             cout << "Number of Copies Available: " << current->numberOfCopies << endl;
+            return;
         } else {
             current = current->next;
         }
     }
+
+    cout << "Video not found.\n";
 }
 
 void Video::displayAllVideos() const {
@@ -97,11 +113,12 @@ void Video::displayAllVideos() const {
 
     if (head == nullptr){
         cout << "No videos available.\n";
+        return;
     } else {
         cout << "Videos: " << endl;
         while (current != nullptr){
             cout << "Video ID: " << current->videoID << endl;
-            cout << "Movie Title: " << current->title;
+            cout << "Movie Title: " << current->title << endl;
             cout << "Genre: " << current->genre << endl;
             cout << "Production: " << current->production << endl;
             cout << endl;
@@ -127,6 +144,6 @@ void Video::isAvailable(int id) const {
             current = current->next;
         }     
     }
-
+    return;
 }
 

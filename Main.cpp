@@ -4,6 +4,7 @@
 #include "Customer.h"
 #include "Customer.cpp"
 #include "CustomerRent.h"
+#include <limits>
 
 using namespace std;
 
@@ -11,23 +12,29 @@ Video vid;
 
 int main() {
 
+    // To add colors for aesthetics
+    const std::string reset = "\033[0m";
+    const std::string bold = "\033[1m";
+    const std::string red = "\033[31m";
+    const std::string green = "\033[32m";
+    const std::string yellow = "\033[33m";
+    const std::string blue = "\033[34m";
     
     while (true){ 
-        cout << "[1] New Video\n";
-        cout << "[2] Rent a Video\n";
-        cout << "[3] Return a Video\n";
-        cout << "[4] Show Video Details\n";
-        cout << "[5] Display all Videos\n";
-        cout << "[6] Check Video Availability\n";
-        cout << "[7] Customer Maintenance\n";
-        cout << "[8] Exit Program\n";
+        cout << yellow << bold << "[1] " << reset << "New Video\n";
+        cout << yellow << bold << "[2] " << reset << "Rent a Video\n";
+        cout << yellow << bold << "[3] " << reset << "Return a Video\n";
+        cout << yellow << bold << "[4] " << reset << "Show Video Details\n";
+        cout << yellow << bold << "[5] " << reset << "Display all Videos\n";
+        cout << yellow << bold << "[6] " << reset << "Check Video Availability\n";
+        cout << yellow << bold << "[7] " << reset << "Customer Maintenance\n";
+        cout << yellow << bold << "[8] " << reset << "Exit Program\n";
 
         int op;
         cout << "\nEnter an option: ";
         cin >> op;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); //
         cout << endl;
-        cin.ignore();
-
 
         std::string title, prod, genre;
         int numofcopies;
@@ -37,7 +44,7 @@ int main() {
         char again;
         switch (op){
             case 1:
-                cout << "[1] New Video\n";
+                cout << green << bold << "[1] New Video\n" << reset;
                 cout << "Enter Movie Title: ";
                 getline(cin, title);
                 cout << "Enter Genre: ";
@@ -49,7 +56,7 @@ int main() {
                 vid.insertVideo(title, prod, genre, numofcopies);
                 break;
             case 2:
-                cout << "[2] Rent a Video\n";
+                cout << green << bold << "[2] Rent a Video\n" << reset;
 
                 do {
                     cout << "Enter Customer ID: ";
@@ -65,38 +72,39 @@ int main() {
                 } while (again == 'Y' || again == 'y');
                 break;
             case 3:
-                cout << "[3] Return a Video\n";
+                cout << green << bold << "[3] Return a Video\n" << reset;
                 break;
             case 4:
-                cout << "[4] Show Video Details\n";
+                cout << green << bold << "[4] Show Video Details" << reset << endl;
 
                 cout << "Enter Video ID: ";
                 cin >> vidID;
-
                 vid.showVideoDetails(vidID);
                 break;
             case 5:
-                cout << "[5] Display all Videos\n";
+                cout << green << bold << "[5] Display all Videos\n" << reset;
                 vid.displayAllVideos();
                 break;
             case 6:
-                cout << "[6] Check Video Availability\n";
+                cout << green << bold << "[6] Check Video Availability\n" << reset;
                 cout << "Enter Video ID: ";
                 cin >> vidID;
 
                 vid.isAvailable(vidID);
                 break;
             case 7:
-                cout << "[1] Add Customer\n";
-                cout << "[2] Show Customer Details\n";
-                cout << "[3] List of Videos Rented by a Customer\n";
+                cout << yellow << bold << "[1] " << reset << "Add Customer\n";
+                cout << yellow << bold << "[2] " << reset << "Show Customer Details\n";
+                cout << yellow << bold << "[3] " << reset << "List of Videos Rented by a Customer\n";
                 break;
             case 8:
                 return 0;
             default:
-                cout << "Invalid option. Please choose a valid option.\n";
+                cout << red << bold << "Invalid option. Please choose a valid option.\n" << reset;
             
         }   
+
+        cout << endl << endl;
 
     }
 
