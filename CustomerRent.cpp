@@ -32,9 +32,10 @@ std::vector<int> CustomerRent::getRentedVideoIDs() const {
     // TODO: Logic to return a vector of all videoIDs in the stack
     // Collect all video IDs
 
-    //  std::vector<int> videoIDs;
+    std::vector<int> videoIDs;
 
     // Traverse the linked list (stack) and collect video IDs into the vector
 
     // Return stack
+    return videoIDs;
 }

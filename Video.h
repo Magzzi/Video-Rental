@@ -15,7 +15,7 @@ private:
         Node* previous;
 
         Node(int id, const std::string &movieTitle, const std::string &movieGenre, const std::string &movieProd, int copies)
-            : videoID(id), title(movieTitle), genre(movieGenre), production(movieProd), numberOfCopies(copies), next(nullptr) {}
+            : videoID(id), title(movieTitle), genre(movieGenre), production(movieProd), numberOfCopies(copies), next(nullptr), previous(nullptr) {}
     };
 
     Node* head;

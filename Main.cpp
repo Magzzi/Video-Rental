@@ -1,13 +1,15 @@
 #include <iostream>
 #include "Video.h"
+#include "Video.cpp"
 #include "Customer.h"
+#include "Customer.cpp"
 #include "CustomerRent.h"
 
 using namespace std;
 
 Video vid;
 
-int main(){
+int main() {
 
     
     while (true){ 
@@ -21,7 +23,10 @@ int main(){
         cout << "[8] Exit Program\n";
 
         int op;
+        cout << "\nEnter an option: ";
         cin >> op;
+        cout << endl;
+        cin.ignore();
 
 
         std::string title, prod, genre;
@@ -33,13 +38,13 @@ int main(){
         switch (op){
             case 1:
                 cout << "[1] New Video\n";
-                cout << "Enter Movie Title: \n";
+                cout << "Enter Movie Title: ";
                 getline(cin, title);
-                cout << "Enter Genre: \n";
+                cout << "Enter Genre: ";
                 getline (cin, genre);
-                cout << "Enter Producer: \n";
+                cout << "Enter Producer: ";
                 getline (cin, prod);
-                cout << "Enter Number of Copies: \n";
+                cout << "Enter Number of Copies: ";
                 cin >> numofcopies;
                 vid.insertVideo(title, prod, genre, numofcopies);
                 break;
