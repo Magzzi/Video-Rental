@@ -15,20 +15,19 @@ Video::~Video() {
     }
 }
 
-void Video::insertVideo(const std::string &title, const std::string &genre, const std::string &production, int copies) {
+void Video::insertVideo(const std::string &movieTitle, const std::string &movieGenre, const std::string &movieProd, int copies) {
     // TODO: Logic to insert a new video node into the linked list
 
     static int videoIDCounter = 1; // to keep in memory
 
 
-    Node* newNode = new Node(title, genre, production, copies);
-    newNode->videoID = videoIDCounter;
+    Node* newNode = new Node(videoIDCounter,movieTitle, movieGenre, movieProd, copies);
 
     if (head == nullptr) {
         head = newNode;
     } else {
         Node *current = head;
-        if (current->title == title){
+        if (current->title == movieTitle){
             current->numberOfCopies += copies;
         }
         while (current->next!= nullptr) {

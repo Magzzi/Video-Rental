@@ -14,8 +14,8 @@ private:
         Node* next;
         Node* previous;
 
-        Node(const std::string &title, const std::string &genre, const std::string &production, int copies)
-            : title(title), genre(genre), production(production), numberOfCopies(copies), next(nullptr) {}
+        Node(int id, const std::string &movieTitle, const std::string &movieGenre, const std::string &movieProd, int copies)
+            : videoID(id), title(movieTitle), genre(movieGenre), production(movieProd), numberOfCopies(copies), next(nullptr) {}
     };
 
     Node* head;
@@ -24,7 +24,7 @@ public:
     Video();
     ~Video();
 
-    void insertVideo(int id, const std::string &title, const std::string &genre, const std::string &production, int copies);
+    void insertVideo(const std::string &movieTitle, const std::string &movieGenre, const std::string &movieProd, int copies);
     void rentVideo(int id);
     void returnVideo(int id);
     void showVideoDetails(int id) const;

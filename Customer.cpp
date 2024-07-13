@@ -12,15 +12,18 @@ Customer::~Customer() {
     }
 }
 
-void Customer::addCustomer(int id, const std::string &name, const std::string &address) {
+void Customer::addCustomer(const std::string &name, const std::string &address) {
     // TODO: Logic to add a new customer to the rear of the queue
-    Node* newNode = new Node(id, name, address);
+
+    static int customerIdCounter = 1;
+    Node* newNode = new Node(customerIdCounter, name, address);
     if (rear) {
         rear->next = newNode;
     } else {
         front = newNode;
     }
     rear = newNode;
+    customerIdCounter++;
 }
 
 void Customer::removeCustomer() {
@@ -43,8 +46,8 @@ void Customer::showCustomerDetails(int id) const {
     while (current) {
         if (current->customerID == id) {
             std::cout << "Customer ID: " << current->customerID << "\n";
-            std::cout << "Name: " << current->name << "\n";
-            std::cout << "Address: " << current->address << "\n";
+            std::cout << "Name: " << current->customerName << "\n";
+            std::cout << "Address: " << current->customerAddress << "\n";
             return;
         }
         current = current->next;
@@ -56,8 +59,8 @@ void Customer::printAllCustomers() const {
     Node* current = front;
     while (current) {
         std::cout << "Customer ID: " << current->customerID << "\n";
-        std::cout << "Name: " << current->name << "\n";
-        std::cout << "Address: " << current->address << "\n";
+        std::cout << "Name: " << current->customerName << "\n";
+        std::cout << "Address: " << current->customerAddress << "\n";
         std::cout << "--------------------------\n";
         current = current->next;
     }

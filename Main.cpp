@@ -1,7 +1,11 @@
 #include <iostream>
-#include <Video.h>
+#include "Video.h"
+#include "Customer.h"
+#include "CustomerRent.h"
 
 using namespace std;
+
+Video vid;
 
 int main(){
 
@@ -19,7 +23,6 @@ int main(){
         int op;
         cin >> op;
 
-        Video vid;
 
         std::string title, prod, genre;
         int numofcopies;
@@ -47,7 +50,6 @@ int main(){
                     cout << "Enter Customer ID: ";
                     cin >> cusID;
 
-                    //call customer details function
 
                     cout << "Enter Video ID to rent: ";
                     cin >> vidID;
@@ -80,19 +82,18 @@ int main(){
                 vid.isAvailable(vidID);
                 break;
             case 7:
-                int subOp;
                 cout << "[1] Add Customer\n";
                 cout << "[2] Show Customer Details\n";
                 cout << "[3] List of Videos Rented by a Customer\n";
-                cin >> subOp;
                 break;
             case 8:
                 return 0;
             default:
                 cout << "Invalid option. Please choose a valid option.\n";
-            break; // Add break statement here
             
         }   
 
     }
+
+    return 0;
 }
