@@ -22,9 +22,11 @@ public:
     Customer();
     ~Customer();
 
-    void addCustomer(int id, const std::string &name, const std::string &address);
+    void addCustomer(int id, const std::string &name, const std::string &address); // Enqueue
+    void removeCustomer(); // Dequeue
     void showCustomerDetails(int id) const;
     void printAllCustomers() const;
 };
+
 
 #endif // CUSTOMER_H
