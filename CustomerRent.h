@@ -1,18 +1,12 @@
 #ifndef CUSTOMERRENT_H
 #define CUSTOMERRENT_H
 
+#include <stack>
 #include <vector>
 
 class CustomerRent {
 private:
-    struct Node {
-        int videoID;
-        Node* next;
-
-        Node(int id) : videoID(id), next(nullptr) {}
-    };
-
-    Node* top;
+    std::stack<int> rentedVideos;
     int customerID;
 
 public:
