@@ -1,15 +1,14 @@
 #include "CustomerRent.h"
 #include <iostream>
+#include <vector>
 
-CustomerRent::CustomerRent(int id) : customerID(id), top(nullptr) {}
+CustomerRent::CustomerRent(int id) : customerID(id) {
+    // Constructor implementation
+}
 
 CustomerRent::~CustomerRent() {
-    Node* current = top;
-    while (current) {
-        Node* next = current->next;
-        delete current;
-        current = next;
-    }
+    // Destructor implementation
+    // No need to manually delete nodes, the STL stack will handle memory management
 }
 
 void CustomerRent::rentVideo(int videoID) {
@@ -30,12 +29,5 @@ int CustomerRent::getCustomerID() const {
 
 std::vector<int> CustomerRent::getRentedVideoIDs() const {
     // TODO: Logic to return a vector of all videoIDs in the stack
-    // Collect all video IDs
-
-    std::vector<int> videoIDs;
-
-    // Traverse the linked list (stack) and collect video IDs into the vector
-
-    // Return stack
-    return videoIDs;
+    return std::vector<int>();
 }
