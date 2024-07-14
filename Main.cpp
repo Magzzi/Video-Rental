@@ -9,6 +9,7 @@
 using namespace std;
 
 Video vid;
+Customer cus;
 
 int main() {
 
@@ -30,13 +31,17 @@ int main() {
         cout << yellow << bold << "[7] " << reset << "Customer Maintenance\n";
         cout << yellow << bold << "[8] " << reset << "Exit Program\n";
 
-        int op;
-        cout << "\nEnter an option: ";
-        cin >> op;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); //
+        int op, customerOp;
+        cout << blue << bold << "\nEnter an option: " << reset;
+        while (!(cin >> op)) {
+            cout << red << bold  << "Invalid input. " << blue << "Please enter a valid option: " << reset;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << endl;
 
-        std::string title, prod, genre;
+        std::string title, prod, genre, name, address;
         int numofcopies;
 
         int cusID;
@@ -96,6 +101,41 @@ int main() {
                 cout << yellow << bold << "[1] " << reset << "Add Customer\n";
                 cout << yellow << bold << "[2] " << reset << "Show Customer Details\n";
                 cout << yellow << bold << "[3] " << reset << "List of Videos Rented by a Customer\n";
+
+                cout << blue << bold << "\nEnter an option: " << reset;
+                
+                while (!(cin >> customerOp)) {
+                    cout << red << bold  << "Invalid input. " << blue << "Please enter a valid option: " << reset;
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                }
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << endl;
+
+                switch (customerOp){
+                    case 1:
+                        cout << green << bold << "[1] Add Customer\n" << reset;
+                        cout << "Enter Customer Name: ";
+                        getline(cin, name);
+                        cout << "Enter Customer Address: ";
+                        getline(cin, address);
+                        cus.addCustomer(name, address);
+                        break;
+                    case 2:
+                        cout << green << bold << "[2] Show Customer Detail\n" << reset;
+                        cout << "Enter Customer ID: ";
+                        cin >> cusID;
+                        cus.showCustomerDetails(cusID);
+                        break;
+                    case 3:
+                        cout << green << bold << "[3] List of Videos Rented by a Customer\n" << reset;
+                        cout << "Enter Customer ID: ";
+                        cin >> cusID;
+                        // cus.displayAllVideosRentedByCustomer(cusID);
+                        break;
+                    default:
+                        cout << red << bold << "Invalid option. " << blue << "Please enter a valid option\n";
+                }
                 break;
             case 8:
                 return 0;
