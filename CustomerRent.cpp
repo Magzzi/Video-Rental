@@ -1,33 +1,142 @@
 #include "CustomerRent.h"
 #include <iostream>
-#include <vector>
+#include <stack>
 
-CustomerRent::CustomerRent(int id) : customerID(id) {
-    // Constructor implementation
+using namespace std;
+
+CustomerRent::CustomerRent() : head(nullptr) {
+    // Constructor initializes any necessary data structures
 }
 
 CustomerRent::~CustomerRent() {
-    // Destructor implementation
-    // No need to manually delete nodes, the STL stack will handle memory management
+    // Destructor to clean up allocated memory, if any
+    while (head) {
+        customerNode* temp = head;
+        head = head->next;
+        delete temp;
+    }
 }
 
-void CustomerRent::rentVideo(int videoID) {
+void CustomerRent::rentVideo(int videoID, int cusID) {
     // TODO: Logic to push a videoID onto the stack
+    // add to all rented video list
+
+
+    customerNode* current = head;
+
+    while (current){
+        if (current->customerID == cusID){
+            // customer found
+            current->CustomerRentedVideoIDs.push(videoID);
+            AllRentedVideoIDs.push(videoID); // add to the list of all rented video IDs
+            return;
+        }
+        current = current->next;
+    }
+
+    // if customer not found
+
+    customerNode* newNode = new customerNode(cusID);
+    newNode->CustomerRentedVideoIDs.push(videoID);
+    newNode->next = head;
+    head = newNode;
+    AllRentedVideoIDs.push(videoID); // add to the list of all rented video IDs
 }
 
-void CustomerRent::returnVideo(int videoID) {
-    // TODO: Logic to pop a videoID from the stack
+void CustomerRent::returnVideo(int videoID, int cusID) {
+
+
+    // search for customer
+
+    customerNode* current = head;
+
+    while (current){
+        if (current->customerID == cusID){
+            // customer found
+            stack<int> tempStack;
+            bool found = false;
+            while (!current->CustomerRentedVideoIDs.empty()) {
+                int vid = current->CustomerRentedVideoIDs.top();
+                current->CustomerRentedVideoIDs.pop();
+                if (vid == videoID) {
+                    found = true; // Video found
+                    break;
+                }
+                tempStack.push(vid);
+            }
+
+            // restore the values of the original stack
+
+            while (!tempStack.empty()) {
+                current->CustomerRentedVideoIDs.push(tempStack.top());
+                tempStack.pop();
+            }
+
+            // if the video was found
+
+            if (found){
+                stack<int> tempAllRented; // another temporary stack for all rented videos
+                while (!AllRentedVideoIDs.empty()) {
+                    int vid = AllRentedVideoIDs.top();
+                    AllRentedVideoIDs.pop();
+                    if (vid != videoID) {
+                        tempAllRented.push(vid); // Keep other videos in temporary stack
+                    }
+                }
+
+                // Restore original stack
+                while (!tempAllRented.empty()) {
+                    AllRentedVideoIDs.push(tempAllRented.top());
+                    tempAllRented.pop();
+                }
+
+                cout << "Video ID " << videoID << " returned by customer ID " << cusID << endl;
+                } else {
+                    cout << "Customer ID " << cusID << " did not rent video ID " << videoID << endl;
+                }
+                return;
+            }
+
+            current = current->next;
+        }
+        
+    cout << "Customer ID " << cusID << " not found" << endl;
+
 }
 
 void CustomerRent::printRentedVideos() const {
     // TODO: Logic to print all videoIDs in the stack
+    
+    customerNode* current = head;
+
+    while (current){
+        cout << "Customer ID: " << current->customerID << " , Rented Videos: ";
+        stack<int>tempStack =  current->CustomerRentedVideoIDs;
+
+        while (!tempStack.empty()){
+            cout << tempStack.top() << " ";
+            tempStack.pop();
+        }
+
+        cout << endl;
+        current = current->next;
+    }
+
 }
 
-int CustomerRent::getCustomerID() const {
-    return customerID;
-}
 
-std::vector<int> CustomerRent::getRentedVideoIDs() const {
+stack<int> CustomerRent::getRentedVideoIDs(int cusID) const {
     // TODO: Logic to return a vector of all videoIDs in the stack
-    return std::vector<int>();
+
+    // find the customer
+    customerNode* current = head;
+    while (current) {
+        if (current->customerID == cusID) {
+            // if customer found, then return rented video id/s
+            return current->CustomerRentedVideoIDs;
+        }
+        current = current->next;
+    }
+    // if not found, then return empty stack
+    return stack<int>();
 }

@@ -12,6 +12,18 @@ Customer::~Customer() {
     }
 }
 
+bool Customer::checkCustomer(int id) const{
+    Node* current = front;
+    while (current) {
+        if (current->customerID == id) {
+            return true;
+        }
+        current = current->next;
+    }
+    return false;
+
+
+}
 void Customer::addCustomer(const std::string &name, const std::string &address) {
     // TODO: Logic to add a new customer to the rear of the queue
 

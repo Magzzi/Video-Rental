@@ -1,5 +1,6 @@
 #include "Video.h"
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -144,6 +145,19 @@ void Video::isAvailable(int id) const {
             current = current->next;
         }     
     }
+    cout << "Video not found\n";
     return;
 }
 
+
+std::string Video::getMovieTitle(int id) const {
+    Node* current = head;
+    while (current!= nullptr) {
+        if (current->videoID == id) {
+            return current->title;
+        } else {
+            current = current->next;
+        }
+    }
+    return "";
+}

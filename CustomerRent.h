@@ -2,23 +2,31 @@
 #define CUSTOMERRENT_H
 
 #include <stack>
-#include <vector>
+#include <iostream>
 
 class CustomerRent {
 private:
-    std::stack<int> rentedVideos;
-    int customerID;
+    struct customerNode {
+        int customerID;
+        std::stack<int> CustomerRentedVideoIDs;
+        customerNode* next;
+
+        customerNode(int id) : customerID(id), next(nullptr) {}
+    };
+
+    std::stack<int> AllRentedVideoIDs; // Track all rented video IDs
+    customerNode* head; // Example of a linked list head for customer nodes
 
 public:
-    CustomerRent(int id);
+    CustomerRent();
     ~CustomerRent();
-
-    void rentVideo(int videoID);
-    void returnVideo(int videoID);
+    // Operations
+    void rentVideo(int videoID, int cusID);
+    void returnVideo(int videoID, int cusID);
     void printRentedVideos() const;
 
-    int getCustomerID() const;
-    std::vector<int> getRentedVideoIDs() const;
+    // Getters (assuming you want to retrieve specific customer's rented videos)
+    std::stack<int> getRentedVideoIDs(int cusID) const;
 };
 
 #endif // CUSTOMERRENT_H

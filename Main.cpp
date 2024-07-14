@@ -1,15 +1,18 @@
 #include <iostream>
+#include <stack>
 #include "Video.h"
 #include "Video.cpp"
 #include "Customer.h"
 #include "Customer.cpp"
 #include "CustomerRent.h"
+#include "CustomerRent.cpp"
 #include <limits>
 
 using namespace std;
 
 Video vid;
 Customer cus;
+CustomerRent customerRent;
 
 int main() {
 
@@ -43,12 +46,13 @@ int main() {
 
         std::string title, prod, genre, name, address;
         int numofcopies;
-
+        stack<int> rented;
+        stack<int> temp;
         int cusID;
         int vidID;
         char again;
         switch (op){
-            case 1:
+            case 1: // add a new video
                 cout << green << bold << "[1] New Video\n" << reset;
                 cout << "Enter Movie Title: ";
                 getline(cin, title);
@@ -60,44 +64,63 @@ int main() {
                 cin >> numofcopies;
                 vid.insertVideo(title, prod, genre, numofcopies);
                 break;
-            case 2:
+            case 2: // rent a video
                 cout << green << bold << "[2] Rent a Video\n" << reset;
 
                 do {
-                    cout << "Enter Customer ID: ";
-                    cin >> cusID;
-
+        
+                    do {
+                        cout << "Enter Customer ID: ";
+                        while (!(cin >> cusID)) {
+                            cout << red << bold  << "Invalid input. " << blue << "Please enter a valid option: " << reset;
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        }
+                    } while (!cus.checkCustomer(cusID));
 
                     cout << "Enter Video ID to rent: ";
                     cin >> vidID;
                     vid.rentVideo(vidID);
+                    customerRent.rentVideo(vidID, cusID);
 
                     cout << "Do you want to rent another video? (Y/N)";
                     cin >> again;
                 } while (again == 'Y' || again == 'y');
                 break;
-            case 3:
+            case 3: // return a video
                 cout << green << bold << "[3] Return a Video\n" << reset;
+                do {
+                    cout << "Enter Customer ID: ";
+                    cin >> cusID;
+                    cout << "Enter Video ID to return: ";
+                    cin >> vidID;
+                    customerRent.returnVideo(vidID, cusID);
+                    vid.returnVideo(vidID);
+
+                    cout << "Do you want to return another video? (Y/N)";
+                    cin >> again;
+                } while (again == 'Y' || again == 'y');
+
                 break;
-            case 4:
+            case 4: // show video details
                 cout << green << bold << "[4] Show Video Details" << reset << endl;
 
                 cout << "Enter Video ID: ";
                 cin >> vidID;
                 vid.showVideoDetails(vidID);
                 break;
-            case 5:
+            case 5: // display all videos
                 cout << green << bold << "[5] Display all Videos\n" << reset;
                 vid.displayAllVideos();
                 break;
-            case 6:
+            case 6: // check video availability
                 cout << green << bold << "[6] Check Video Availability\n" << reset;
                 cout << "Enter Video ID: ";
                 cin >> vidID;
 
                 vid.isAvailable(vidID);
                 break;
-            case 7:
+            case 7: // customer maintenance
                 cout << yellow << bold << "[1] " << reset << "Add Customer\n";
                 cout << yellow << bold << "[2] " << reset << "Show Customer Details\n";
                 cout << yellow << bold << "[3] " << reset << "List of Videos Rented by a Customer\n";
@@ -113,7 +136,7 @@ int main() {
                 cout << endl;
 
                 switch (customerOp){
-                    case 1:
+                    case 1: // add a new customer
                         cout << green << bold << "[1] Add Customer\n" << reset;
                         cout << "Enter Customer Name: ";
                         getline(cin, name);
@@ -121,17 +144,26 @@ int main() {
                         getline(cin, address);
                         cus.addCustomer(name, address);
                         break;
-                    case 2:
+                    case 2: // show customer details
                         cout << green << bold << "[2] Show Customer Detail\n" << reset;
                         cout << "Enter Customer ID: ";
                         cin >> cusID;
                         cus.showCustomerDetails(cusID);
                         break;
-                    case 3:
+                    case 3: // list of videos
                         cout << green << bold << "[3] List of Videos Rented by a Customer\n" << reset;
                         cout << "Enter Customer ID: ";
                         cin >> cusID;
-                        // cus.displayAllVideosRentedByCustomer(cusID);
+                        
+                        rented = customerRent.getRentedVideoIDs(cusID);
+                        temp = rented;
+                        while (!temp.empty()){
+                            cout << temp.top() << " " << vid.getMovieTitle(temp.top());
+                            temp.pop();
+                        }
+
+                        cout << endl;
+
                         break;
                     default:
                         cout << red << bold << "Invalid option. " << blue << "Please enter a valid option\n";
