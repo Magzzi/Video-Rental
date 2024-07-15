@@ -10,13 +10,13 @@
 
 using namespace std;
 
-Video vid;
-Customer cus;
-CustomerRent customerRent;
+
 
 int main() {
 
-
+    Video vid;
+    Customer cus;
+    CustomerRent customerRent;
     vid.initMovies(); // initializes the list of videos
     vid.updateVideoList();
     cus.initCustomer(); // initializes the list of customers
