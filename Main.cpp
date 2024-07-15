@@ -18,7 +18,9 @@ int main() {
 
 
     vid.initMovies(); // initializes the list of videos
+    vid.updateVideoList();
     cus.initCustomer(); // initializes the list of customers
+    cus.updateCustomerList();
     
     // To add colors for aesthetics
     const std::string reset = "\033[0m";
@@ -29,6 +31,7 @@ int main() {
     const std::string blue = "\033[34m";
     
     while (true){ 
+        customerRent.updateCustomerRent();
         cout << yellow << bold << "[1] " << reset << "New Video\n";
         cout << yellow << bold << "[2] " << reset << "Rent a Video\n";
         cout << yellow << bold << "[3] " << reset << "Return a Video\n";
@@ -118,10 +121,11 @@ int main() {
                     cin >> vidID;
                     vid.rentVideo(vidID);
                     customerRent.rentVideo(vidID, cusID);
-
+                    customerRent.updateCustomerRent();
                     cout << "Do you want to rent another video? (Y/N) ";
                     cin >> again;
                 } while (again == 'Y' || again == 'y');
+
                 break;
             case 3: // return a video
                 cout << green << bold << "[3] Return a Video\n" << reset;
@@ -141,15 +145,14 @@ int main() {
                             cout << "["<<temp.top() << "] " << vid.getMovieTitle(temp.top()) << endl;
                             temp.pop();
                         }
-                    }
-                    
+                    }                  
 
                     cout << endl;
                     cout << "Enter Video ID to return: ";
                     cin >> vidID;
                     customerRent.returnVideo(vidID, cusID);
                     vid.returnVideo(vidID);
-
+                    customerRent.updateCustomerRent();
                     cout << "Do you want to return another video? (Y/N) ";
                     cin >> again;
                 } while (again == 'Y' || again == 'y');

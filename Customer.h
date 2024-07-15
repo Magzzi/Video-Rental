@@ -27,6 +27,7 @@ public:
     void removeCustomer(); // Dequeue
     void showCustomerDetails(int id) const;
     void printAllCustomers() const;
+    void updateCustomerList() const;
 };
 
 

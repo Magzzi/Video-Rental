@@ -1,7 +1,7 @@
 #include "Customer.h"
 #include <iostream>
 
-
+using namespace std;
 
 Customer::Customer() : front(nullptr), rear(nullptr) {}
 
@@ -57,6 +57,7 @@ void Customer::addCustomer(const std::string &name, const std::string &address) 
     }
     rear = newNode;
     customerIdCounter++;
+    updateCustomerList();
 }
 
 void Customer::removeCustomer() {
@@ -71,6 +72,8 @@ void Customer::removeCustomer() {
     } else {
         std::cout << "Queue is empty. No customer to remove.\n";
     }
+
+    updateCustomerList();
 }
 
 void Customer::showCustomerDetails(int id) const {
@@ -97,4 +100,26 @@ void Customer::printAllCustomers() const {
         std::cout << "--------------------------\n";
         current = current->next;
     }
+}
+
+void Customer::updateCustomerList() const {
+    ofstream MyFile("Customer.txt");
+
+    if (!MyFile.is_open()) {
+        cout << "Error opening file for writing!" << endl;
+        return;
+    }
+
+    Node* current = front;
+    MyFile << "List of All Customers:" << endl;
+    MyFile << "-------------------" << endl;
+    while (current) {
+        MyFile << "Customer ID: " << current->customerID << "\n";
+        MyFile << "Name: " << current->customerName << "\n";
+        MyFile << "Address: " << current->customerAddress << "\n";
+        MyFile << "--------------------------\n";
+        current = current->next;
+    }
+
+    MyFile.close();
 }

@@ -34,7 +34,7 @@ public:
     void displayAllVideos() const;
     void isAvailable(int id) const;
     std::string getMovieTitle(int id) const;
-
+    void updateVideoList() const;
     bool isEmpty() const;
 
 };

@@ -1,8 +1,10 @@
 #include "CustomerRent.h"
+
 #include <iostream>
 #include <stack>
 
 using namespace std;
+
 
 CustomerRent::CustomerRent() : head(nullptr) {
     // Constructor initializes any necessary data structures
@@ -41,6 +43,7 @@ void CustomerRent::rentVideo(int videoID, int cusID) {
     newNode->next = head;
     head = newNode;
     AllRentedVideoIDs.push(videoID); // add to the list of all rented video IDs
+
 }
 
 void CustomerRent::returnVideo(int videoID, int cusID) {
@@ -139,4 +142,36 @@ stack<int> CustomerRent::getRentedVideoIDs(int cusID) const {
     }
     // if not found, then return empty stack
     return stack<int>();
+}
+
+void CustomerRent::updateCustomerRent() const {
+    // TODO: Logic to update the rented video id/s in the stack
+   // Customer Id       |    Video ID     | Video Title
+   // 1                 |  1              | The Matrix
+
+   ofstream MyFile("CustomerRent.txt");
+
+    if (!MyFile.is_open()) {
+        cout << "Error opening file for writing!" << endl;
+        return;
+    }
+
+
+    customerNode* current = head; // start at the first customer
+    while (current) {
+        int customerId = current->customerID;
+        stack<int> rentedVideoIDs = current->CustomerRentedVideoIDs;
+
+        while (!rentedVideoIDs.empty()) {
+            int videoId = rentedVideoIDs.top();
+            rentedVideoIDs.pop();
+
+
+            MyFile << "Customer ID: " << customerId << " | Video ID: " << videoId << "\n";
+        }
+
+        current = current->next;
+    }
+
+    MyFile.close();
 }

@@ -3,6 +3,7 @@
 
 #include <stack>
 #include <iostream>
+#include "Video.h"
 
 class CustomerRent {
 private:
@@ -24,7 +25,7 @@ public:
     void rentVideo(int videoID, int cusID);
     void returnVideo(int videoID, int cusID);
     void printRentedVideos() const;
-
+    void updateCustomerRent() const;
     // Getters (assuming you want to retrieve specific customer's rented videos)
     std::stack<int> getRentedVideoIDs(int cusID) const;
 };

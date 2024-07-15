@@ -1,0 +1,42 @@
+List of All Customers:
+-------------------
+Customer ID: 1
+Name: Zio Magugat
+Address: Malolos, Bulacan
+--------------------------
+Customer ID: 2
+Name: Derick Odda
+Address: Quezon City, Metro Manila
+--------------------------
+Customer ID: 3
+Name: Igon Dela Cruz
+Address: Binangonan, Rizal
+--------------------------
+Customer ID: 4
+Name: Klyde Mejia
+Address: Meycauayan, Bulacan
+--------------------------
+Customer ID: 5
+Name: Eugene Arago
+Address: Tondo, Manila
+--------------------------
+Customer ID: 6
+Name: LeBron James
+Address: Beverly Hills, California
+--------------------------
+Customer ID: 7
+Name: Anthony Edwards
+Address: Atlanta, Georgia
+--------------------------
+Customer ID: 8
+Name: Stephen Curry
+Address: Silicon Valley, San Francisco
+--------------------------
+Customer ID: 9
+Name: Taylor Swift
+Address: New York City, New York
+--------------------------
+Customer ID: 10
+Name: Johnny Depp
+Address: Somerset, England
+--------------------------

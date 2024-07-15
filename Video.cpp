@@ -1,6 +1,7 @@
 #include "Video.h"
 #include <iostream>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -27,6 +28,7 @@ void Video::insertVideo(const std::string &movieTitle, const std::string &movieG
         if (current->title == movieTitle) {
             // Movie already exists, increment the number of copies
             current->numberOfCopies += copies;
+            updateVideoList();
             return;
         }
         current = current->next;
@@ -42,9 +44,6 @@ void Video::insertVideo(const std::string &movieTitle, const std::string &movieG
         head = newNode;
     } else {
         Node *current = head;
-        if (current->title == movieTitle){
-            current->numberOfCopies += copies;
-        }
         while (current->next!= nullptr) {
             current = current->next;
         }
@@ -53,6 +52,7 @@ void Video::insertVideo(const std::string &movieTitle, const std::string &movieG
     }
 
     videoIDCounter++;
+    updateVideoList();
 }
 
 void Video::insertExistingVideo(int id, int copies){
@@ -60,6 +60,7 @@ void Video::insertExistingVideo(int id, int copies){
     while (current != nullptr) {
         if (current->videoID == id) {
             current->numberOfCopies += copies;
+            updateVideoList();
             return;
         }
         current = current->next;
@@ -76,6 +77,7 @@ void Video::rentVideo(int id) {
         if (current->videoID == id) {
             if (current->numberOfCopies > 0){
                 current->numberOfCopies--;
+                updateVideoList();
                 return;
             } else {
                 cout << "Sorry, video " << id << " is not available or currently out of stock\n.";
@@ -93,6 +95,7 @@ void Video::returnVideo(int id) {
     while (current != nullptr) {
         if (current->videoID == id) {
             current->numberOfCopies++;
+            updateVideoList();
             return;
         } else {
             current = current->next;
@@ -216,4 +219,33 @@ void Video::initMovies(){
     for (int i = 0; i < 25; i++){
         insertVideo(initMovie[i][0], initMovie[i][1], initMovie[i][2], 10);
     }
+}
+
+void Video::updateVideoList() const {
+    ofstream MyFile("Video.txt");
+
+    if (!MyFile.is_open()) {
+        cout << "Error opening file for writing!" << endl;
+        return;
+    }
+
+    Node* current = head;
+
+    if (head == nullptr) {
+        MyFile << "No videos available." << endl;
+    } else {
+        MyFile << "List of All Videos:" << endl;
+        MyFile << "-------------------" << endl;
+        while (current != nullptr) {
+            MyFile << "Video ID: " << current->videoID << endl;
+            MyFile << "Movie Title: " << current->title << endl;
+            MyFile << "Genre: " << current->genre << endl;
+            MyFile << "Production: " << current->production << endl;
+            MyFile << "Number of Copies Available: " << current->numberOfCopies << endl;
+            MyFile << "-------------------" << endl;
+            current = current->next;
+        }
+    }
+
+    MyFile.close();
 }

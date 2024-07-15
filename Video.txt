@@ -1,0 +1,152 @@
+List of All Videos:
+-------------------
+Video ID: 1
+Movie Title: IT
+Genre: Box Office
+Production: Horror
+Number of Copies Available: 10
+-------------------
+Video ID: 2
+Movie Title: A Quiet Place
+Genre: Paramount Pictures
+Production: Horror
+Number of Copies Available: 10
+-------------------
+Video ID: 3
+Movie Title: Smile
+Genre: Paramount Pictures
+Production: Horror
+Number of Copies Available: 10
+-------------------
+Video ID: 4
+Movie Title: Unfriended
+Genre: Universal Pictures
+Production: Horror
+Number of Copies Available: 10
+-------------------
+Video ID: 5
+Movie Title: Cult of Chucky
+Genre: Universal Pictures
+Production: Horror
+Number of Copies Available: 10
+-------------------
+Video ID: 6
+Movie Title: Titanic
+Genre: 20th Century Fox
+Production: Romance
+Number of Copies Available: 10
+-------------------
+Video ID: 7
+Movie Title: 50 First Dates
+Genre: Happy Madison Productions
+Production: Romance
+Number of Copies Available: 10
+-------------------
+Video ID: 8
+Movie Title: The Notebook
+Genre: Gran Via Production
+Production: Romance
+Number of Copies Available: 10
+-------------------
+Video ID: 9
+Movie Title: About Time
+Genre: Working Title Films
+Production: Romance
+Number of Copies Available: 10
+-------------------
+Video ID: 10
+Movie Title: Sweet & Sour
+Genre: KT Hitel
+Production: Romance
+Number of Copies Available: 10
+-------------------
+Video ID: 11
+Movie Title: Interstellar
+Genre: Lynda Obst Production
+Production: Sci-Fi
+Number of Copies Available: 10
+-------------------
+Video ID: 12
+Movie Title: Super 8
+Genre: Bad Robot Production
+Production: Sci-Fi
+Number of Copies Available: 10
+-------------------
+Video ID: 13
+Movie Title: Inception
+Genre: Warner Bros. Pictures
+Production: Sci-Fi
+Number of Copies Available: 10
+-------------------
+Video ID: 14
+Movie Title: The 5th Wave
+Genre: Columbia Pictures
+Production: Sci-Fi
+Number of Copies Available: 10
+-------------------
+Video ID: 15
+Movie Title: Mad Max
+Genre: Kennedy Miller Productions
+Production: Sci-Fi
+Number of Copies Available: 10
+-------------------
+Video ID: 16
+Movie Title: Scott Pilgrim vs. The World
+Genre: Universal Pictures
+Production: Action
+Number of Copies Available: 10
+-------------------
+Video ID: 17
+Movie Title: The Dark Knight
+Genre: Warner Bros. Pictures
+Production: Action
+Number of Copies Available: 10
+-------------------
+Video ID: 18
+Movie Title: The Matrix
+Genre: Warner Bros. Pictures
+Production: Action
+Number of Copies Available: 10
+-------------------
+Video ID: 19
+Movie Title: Gladiator
+Genre: Warner Bros. Pictures
+Production: Action
+Number of Copies Available: 10
+-------------------
+Video ID: 20
+Movie Title: John Wick
+Genre: Thunder Road Pictures
+Production: Action
+Number of Copies Available: 10
+-------------------
+Video ID: 21
+Movie Title: Grown Ups
+Genre: Sony Pictures
+Production: Comedy
+Number of Copies Available: 10
+-------------------
+Video ID: 22
+Movie Title: Rush Hour
+Genre: New Line Cinema
+Production: Comedy
+Number of Copies Available: 10
+-------------------
+Video ID: 23
+Movie Title: The Three Stooges
+Genre: 20th Century Studios
+Production: Comedy
+Number of Copies Available: 10
+-------------------
+Video ID: 24
+Movie Title: 21 Jump Street
+Genre: Sony Pictures
+Production: Comedy
+Number of Copies Available: 10
+-------------------
+Video ID: 25
+Movie Title: Home Alone
+Genre: Warner Bros. Pictures
+Production: Comedy
+Number of Copies Available: 10
+-------------------
