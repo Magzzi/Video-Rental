@@ -115,7 +115,7 @@ int main() {
                     vid.rentVideo(vidID);
                     customerRent.rentVideo(vidID, cusID);
 
-                    cout << "Do you want to rent another video? (Y/N)";
+                    cout << "Do you want to rent another video? (Y/N) ";
                     cin >> again;
                 } while (again == 'Y' || again == 'y');
                 break;
@@ -124,15 +124,31 @@ int main() {
                 do {
                     cout << "Enter Customer ID: ";
                     cin >> cusID;
+
+                    rented = customerRent.getRentedVideoIDs(cusID);
+                    temp = rented;
+
+                    if (temp.empty()){
+                        cout << "Customer " << cusID << " did not rent any videos yet. ";
+                        break;
+                    } else {
+                        cout << "\nVideos Rented: \n";
+                        while (!temp.empty()){
+                            cout << "["<<temp.top() << "] " << vid.getMovieTitle(temp.top()) << endl;
+                            temp.pop();
+                        }
+                    }
+                    
+
+                    cout << endl;
                     cout << "Enter Video ID to return: ";
                     cin >> vidID;
                     customerRent.returnVideo(vidID, cusID);
                     vid.returnVideo(vidID);
 
-                    cout << "Do you want to return another video? (Y/N)";
+                    cout << "Do you want to return another video? (Y/N) ";
                     cin >> again;
                 } while (again == 'Y' || again == 'y');
-
                 break;
             case 4: // show video details
                 cout << green << bold << "[4] Show Video Details" << reset << endl;
