@@ -16,8 +16,8 @@ private:
     };
 
     std::stack<int> AllRentedVideoIDs; // Track all rented video IDs
-    customerNode* head; // Example of a linked list head for customer nodes
-
+    customerNode* head; // 
+    
 public:
     CustomerRent();
     ~CustomerRent();

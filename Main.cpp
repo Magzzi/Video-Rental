@@ -7,6 +7,7 @@
 #include "CustomerRent.h"
 #include "CustomerRent.cpp"
 #include <limits>
+#include <cstdlib>
 
 using namespace std;
 
@@ -30,16 +31,21 @@ int main() {
     const std::string yellow = "\033[33m";
     const std::string blue = "\033[34m";
 
-    // welcome message
-
-    cout << green << bold << "Welcome to our Video Rental System!" << reset << endl << endl;
-    cout << "-------------------------------------------------------------" << endl;
-    cout << "This system allows you to " << bold  << green << "manage videos " << reset << "and " << green << bold << "customers." << reset << endl;
-    cout << "You can " << bold << blue << "add new videos, rent videos, return videos, " << reset << "and " << blue  << bold << "more." << reset << endl;
-    cout << "-------------------------------------------------------------" << endl << endl;
     
-    while (true){ 
+    
+    while (true){
+        // welcome message
+
+        cout << green << bold << "Welcome to our Video Rental System!" << reset << endl << endl;
+        cout << "-------------------------------------------------------------" << endl;
+        cout << "This system allows you to " << bold  << green << "manage videos " << reset << "and " << green << bold << "customers." << reset << endl;
+        cout << "You can " << bold << blue << "add new videos, rent videos, return videos, " << reset << "and " << blue  << bold << "more." << reset << endl;
+        cout << "-------------------------------------------------------------" << endl << endl; 
+
+        // ensure that customer rent is updated
         customerRent.updateCustomerRent();
+
+        // set of options
         cout << yellow << bold << "[1] " << reset << "New Video\n";
         cout << yellow << bold << "[2] " << reset << "Rent a Video\n";
         cout << yellow << bold << "[3] " << reset << "Return a Video\n";
@@ -57,6 +63,7 @@ int main() {
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        system("cls");
         cout << endl;
 
         std::string title, prod, genre, name, address;
@@ -68,6 +75,7 @@ int main() {
         char again;
         switch (op){
             case 1: // add a new video
+                // system("cls");
                 cout << yellow << bold << "[1] " << reset << "New Video\n";
                 cout << yellow << bold << "[2] " << reset << "Add an Existing Video\n";
 
@@ -83,6 +91,7 @@ int main() {
 
                 switch (vidOP){
                     case 1: // add a new video
+                        // system("cls");
                         cout << green << bold << "[1] Add New Video\n" << reset;
                         cout << "Enter Movie Title: ";
                         getline(cin, title);
@@ -92,27 +101,46 @@ int main() {
                         getline (cin, prod);
                         cout << "Enter Number of Copies: ";
                         cin >> numofcopies;
-                        vid.insertVideo(title, prod, genre, numofcopies);
+
+                        if (numofcopies > 0) {
+                            vid.insertVideo(title, prod, genre, numofcopies);
+                            break; // exit the loop if the input is positive
+                        } else {
+                            cout << red << bold <<"\nPlease enter a valid number.\n" << reset;
+                        }
+                        cin.clear(); // clear the error flag
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
                         break;
                     case 2: // add existing video
+                        // system("cls");
                         cout << green << bold << "[2] Add an Existing Video\n" << reset;
 
                         if (vid.isEmpty()){
                             cout << red << bold << "No videos in the database.\n" << reset;
                         } else {
                             vid.displayAllVideos();
-                            cout << "Enter Video ID: ";
+                            cout << blue << bold << "Enter Video ID: " << reset;
                             cin >> vidID;
-                            cout << "How many copies do you want to add? ";
+                            cout << blue << bold << "How many copies do you want to add? " << reset;
                             cin >> numofcopies;
-                            vid.insertExistingVideo(vidID, numofcopies);
+
+                            if (numofcopies > 0) {
+                                vid.insertExistingVideo(vidID, numofcopies);
+                                break; // exit the loop if the input is positive
+                            } else {
+                                cout << red << bold <<"\nPlease enter a valid number.\n" << reset;
+                            }
+                            cin.clear(); // clear the error flag
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
                         }
                         break;
                     default:
                         cout << red << bold << "Invalid option. " << blue << "Please enter a valid option\n";
                 }
+                // system("cls");
                 break;
             case 2: // rent a video
+                // system("cls");
                 cout << green << bold << "[2] Rent a Video\n" << reset;
 
                 do {
@@ -135,9 +163,10 @@ int main() {
                     cout << "Do you want to rent another video? (Y/N) ";
                     cin >> again;
                 } while (again == 'Y' || again == 'y');
-
+                // system("cls");
                 break;
             case 3: // return a video
+                // system("cls");
                 cout << green << bold << "[3] Return a Video\n" << reset;
                 do {
                     cout << "Enter Customer ID: ";
@@ -168,6 +197,7 @@ int main() {
                 } while (again == 'Y' || again == 'y');
                 break;
             case 4: // show video details
+                // system("cls");
                 cout << green << bold << "[4] Show Video Details" << reset << endl;
 
                 cout << "Enter Video ID: ";
@@ -175,10 +205,12 @@ int main() {
                 vid.showVideoDetails(vidID);
                 break;
             case 5: // display all videos
+                // system("cls");
                 cout << green << bold << "[5] Display all Videos\n" << reset;
                 vid.displayAllVideos();
                 break;
             case 6: // check video availability
+                // system("cls");
                 cout << green << bold << "[6] Check Video Availability\n" << reset;
                 cout << "Enter Video ID: ";
                 cin >> vidID;
@@ -186,6 +218,7 @@ int main() {
                 vid.isAvailable(vidID);
                 break;
             case 7: // customer maintenance
+                // system("cls");
                 cout << yellow << bold << "[1] " << reset << "Add Customer\n";
                 cout << yellow << bold << "[2] " << reset << "Show Customer Details\n";
                 cout << yellow << bold << "[3] " << reset << "List of Videos Rented by a Customer\n";
@@ -202,6 +235,7 @@ int main() {
 
                 switch (customerOp){
                     case 1: // add a new customer
+                        // system("cls");
                         cout << green << bold << "[1] Add Customer\n" << reset;
                         cout << "Enter Customer Name: ";
                         getline(cin, name);
@@ -210,12 +244,14 @@ int main() {
                         cus.addCustomer(name, address);
                         break;
                     case 2: // show customer details
+                        // system("cls");
                         cout << green << bold << "[2] Show Customer Detail\n" << reset;
                         cout << "Enter Customer ID: ";
                         cin >> cusID;
                         cus.showCustomerDetails(cusID);
                         break;
                     case 3: // list of videos
+                        // system("cls");
                         cout << green << bold << "[3] List of Videos Rented by a Customer\n" << reset;
                         cout << "Enter Customer ID: ";
                         cin >> cusID;
@@ -248,8 +284,8 @@ int main() {
             
         }   
 
-        cout << endl << endl;
-
+        cout << endl;
+            
     }
 
     return 0;
