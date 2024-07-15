@@ -54,6 +54,19 @@ void Video::insertVideo(const std::string &movieTitle, const std::string &movieG
     videoIDCounter++;
 }
 
+void Video::insertExistingVideo(int id, int copies){
+    Node* current = head;
+    while (current != nullptr) {
+        if (current->videoID == id) {
+            current->numberOfCopies += copies;
+            return;
+        }
+        current = current->next;
+    }
+
+    cout << "Unable to add existing video. Video ID " << id << " not found" << endl;
+}
+
 void Video::rentVideo(int id) {
     // TODO: Logic to decrement the number of copies if available
 
@@ -160,4 +173,8 @@ std::string Video::getMovieTitle(int id) const {
         }
     }
     return "";
+}
+
+bool Video::isEmpty() const {
+    return head == nullptr;
 }

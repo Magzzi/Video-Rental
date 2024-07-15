@@ -34,7 +34,7 @@ int main() {
         cout << yellow << bold << "[7] " << reset << "Customer Maintenance\n";
         cout << yellow << bold << "[8] " << reset << "Exit Program\n";
 
-        int op, customerOp;
+        int op, customerOp, vidOP;
         cout << blue << bold << "\nEnter an option: " << reset;
         while (!(cin >> op)) {
             cout << red << bold  << "Invalid input. " << blue << "Please enter a valid option: " << reset;
@@ -53,22 +53,54 @@ int main() {
         char again;
         switch (op){
             case 1: // add a new video
-                cout << green << bold << "[1] New Video\n" << reset;
-                cout << "Enter Movie Title: ";
-                getline(cin, title);
-                cout << "Enter Genre: ";
-                getline (cin, genre);
-                cout << "Enter Producer: ";
-                getline (cin, prod);
-                cout << "Enter Number of Copies: ";
-                cin >> numofcopies;
-                vid.insertVideo(title, prod, genre, numofcopies);
+                cout << yellow << bold << "[1] " << reset << "New Video\n";
+                cout << yellow << bold << "[2] " << reset << "Add an Existing Video\n";
+
+                cout << blue << bold << "\nEnter an option: " << reset;
+                while (!(cin >> vidOP)) {
+                    cout << red << bold  << "Invalid input. " << blue << "Please enter a valid option: " << reset;
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                }
+
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << endl;
+
+                switch (vidOP){
+                    case 1: // add a new video
+                        cout << green << bold << "[1] Add New Video\n" << reset;
+                        cout << "Enter Movie Title: ";
+                        getline(cin, title);
+                        cout << "Enter Genre: ";
+                        getline (cin, genre);
+                        cout << "Enter Producer: ";
+                        getline (cin, prod);
+                        cout << "Enter Number of Copies: ";
+                        cin >> numofcopies;
+                        vid.insertVideo(title, prod, genre, numofcopies);
+                        break;
+                    case 2: // add existing video
+                        cout << green << bold << "[2] Add an Existing Video\n" << reset;
+
+                        if (vid.isEmpty()){
+                            cout << red << bold << "No videos in the database.\n" << reset;
+                        } else {
+                            vid.displayAllVideos();
+                            cout << "Enter Video ID: ";
+                            cin >> vidID;
+                            cout << "How many copies do you want to add? ";
+                            cin >> numofcopies;
+                            vid.insertExistingVideo(vidID, numofcopies);
+                        }
+                        break;
+                    default:
+                        cout << red << bold << "Invalid option. " << blue << "Please enter a valid option\n";
+                }
                 break;
             case 2: // rent a video
                 cout << green << bold << "[2] Rent a Video\n" << reset;
 
                 do {
-        
                     do {
                         cout << "Enter Customer ID: ";
                         while (!(cin >> cusID)) {

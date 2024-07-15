@@ -27,12 +27,15 @@ public:
 
     
     void insertVideo(const std::string &movieTitle, const std::string &movieGenre, const std::string &movieProd, int copies);
+    void insertExistingVideo(int id, int copies);
     void rentVideo(int id);
     void returnVideo(int id);
     void showVideoDetails(int id) const;
     void displayAllVideos() const;
     void isAvailable(int id) const;
     std::string getMovieTitle(int id) const;
+
+    bool isEmpty() const;
 
 };
 
