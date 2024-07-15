@@ -21,6 +21,7 @@ private:
 public:
     Customer();
     ~Customer();
+    void initCustomer();
     bool checkCustomer(int id) const;
     void addCustomer(const std::string &name, const std::string &address); // Enqueue
     void removeCustomer(); // Dequeue

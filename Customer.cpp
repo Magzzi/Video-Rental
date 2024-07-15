@@ -1,6 +1,8 @@
 #include "Customer.h"
 #include <iostream>
 
+
+
 Customer::Customer() : front(nullptr), rear(nullptr) {}
 
 Customer::~Customer() {
@@ -12,6 +14,25 @@ Customer::~Customer() {
     }
 }
 
+
+void Customer::initCustomer(){
+    string customerInit[10][2] = {
+        {"Zio Magugat", "Malolos, Bulacan"},
+        {"Derick Odda", "Quezon City, Metro Manila"},
+        {"Igon Dela Cruz", "Binangonan, Rizal"},
+        {"Klyde Mejia", "Meycauayan, Bulacan"},
+        {"Eugene Arago", "Tondo, Manila"},
+        {"LeBron James", "Beverly Hills, California"},
+        {"Anthony Edwards", "Atlanta, Georgia"},
+        {"Stephen Curry", "Silicon Valley, San Francisco"},
+        {"Taylor Swift", "New York City, New York"},
+        {"Johnny Depp", "Somerset, England"}
+    };
+
+    for (int i = 0; i < 10; i++){
+        addCustomer(customerInit[i][0], customerInit[i][1]);
+    }
+}
 bool Customer::checkCustomer(int id) const{
     Node* current = front;
     while (current) {
@@ -64,7 +85,7 @@ void Customer::showCustomerDetails(int id) const {
         }
         current = current->next;
     }
-    std::cout << "Customer with ID " << id << " not found.\n";
+    cout << "\033[31m" << "\033[1m" << "Customer with ID " << id << " not found.\n" << "\033[0m";
 }
 
 void Customer::printAllCustomers() const {

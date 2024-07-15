@@ -65,7 +65,7 @@ void Video::insertExistingVideo(int id, int copies){
         current = current->next;
     }
 
-    cout << "Unable to add existing video. Video ID " << id << " not found" << endl;
+    cout << "\033[31m" << "\033[1m"  << "Unable to add existing video. Video ID " << id << " not found" << "\033[0m" << endl;
 }
 
 void Video::rentVideo(int id) {
@@ -98,7 +98,7 @@ void Video::returnVideo(int id) {
             current = current->next;
         }
     }
-    cout << "Video " << id << " not found.\n";
+    cout << "\033[31m" << "\033[1m" << "Video " << id << " not found.\n" << "\033[0m";
 }
 
 void Video::showVideoDetails(int id) const {
@@ -159,7 +159,7 @@ void Video::isAvailable(int id) const {
             current = current->next;
         }     
     }
-    cout << "Video not found\n";
+    cout << "\033[31m" << "\033[1m" << "Video not found\n" << "\033[0m";
     return;
 }
 

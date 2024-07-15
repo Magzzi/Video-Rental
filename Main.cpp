@@ -17,7 +17,9 @@ CustomerRent customerRent;
 int main() {
 
 
-    vid.initMovies();
+    vid.initMovies(); // initializes the list of videos
+    cus.initCustomer(); // initializes the list of customers
+    
     // To add colors for aesthetics
     const std::string reset = "\033[0m";
     const std::string bold = "\033[1m";
