@@ -36,6 +36,7 @@ public:
     std::string getMovieTitle(int id) const;
     void updateVideoList() const;
     bool isEmpty() const;
+    bool doesExist(int id) const;
 
 };
 

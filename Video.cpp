@@ -7,9 +7,9 @@ using namespace std;
 
 
 
-Video::Video() : head(nullptr) {}
+Video::Video() : head(nullptr) {} // constructor
 
-Video::~Video() {
+Video::~Video() { // destructor
     Node* current = head;
     while (current) {
         Node* next = current->next;
@@ -18,8 +18,7 @@ Video::~Video() {
     }
 }
 
-void Video::insertVideo(const std::string &movieTitle, const std::string &movieGenre, const std::string &movieProd, int copies) {
-    // TODO: Logic to insert a new video node into the linked list
+void Video::insertVideo(const std::string &movieTitle, const std::string &movieGenre, const std::string &movieProd, int copies) { // inserts a new video node into the linked list
     
     // check if movie already exist
 
@@ -55,7 +54,7 @@ void Video::insertVideo(const std::string &movieTitle, const std::string &movieG
     updateVideoList();
 }
 
-void Video::insertExistingVideo(int id, int copies){
+void Video::insertExistingVideo(int id, int copies){ // allows the user to insert an existing video; if exists, number of copies will increase
     Node* current = head;
     while (current != nullptr) {
         if (current->videoID == id) {
@@ -69,8 +68,7 @@ void Video::insertExistingVideo(int id, int copies){
     cout << "\033[31m" << "\033[1m"  << "Unable to add existing video. Video ID " << id << " not found" << "\033[0m" << endl;
 }
 
-void Video::rentVideo(int id) {
-    // TODO: Logic to decrement the number of copies if available
+void Video::rentVideo(int id) { // allows the user to rent a video, which decrements the number of copies if available
 
     Node* current = head;
     while (current != nullptr) {
@@ -89,8 +87,7 @@ void Video::rentVideo(int id) {
     }
 }
 
-void Video::returnVideo(int id) {
-    // TODO: Logic to increment the number of copies
+void Video::returnVideo(int id) { // return video and increment the copies
     Node* current = head;
     while (current != nullptr) {
         if (current->videoID == id) {
@@ -104,8 +101,7 @@ void Video::returnVideo(int id) {
     cout << "\033[31m" << "\033[1m" << "Video " << id << " not found.\n" << "\033[0m";
 }
 
-void Video::showVideoDetails(int id) const {
-    // TODO: Logic to display video details of the node with the given id]
+void Video::showVideoDetails(int id) const { // display video details of the node with the given id
 
     Node* current = head;
 
@@ -124,8 +120,7 @@ void Video::showVideoDetails(int id) const {
     cout << "\033[31m" << "\033[1m" << "Video not found.\n" << "\033[0m";
 }
 
-void Video::displayAllVideos() const {
-    // TODO: Logic to display details of all videos in the linked list
+void Video::displayAllVideos() const { // display details of all videos in the linked list
 
     Node* current = head;
 
@@ -145,18 +140,19 @@ void Video::displayAllVideos() const {
     }
 }
 
-void Video::isAvailable(int id) const {
-    // TODO: Logic to check if the video with the given id is available (number of copies > 0)
+void Video::isAvailable(int id) const { // check if the video with the given id is available (number of copies > 0) or check if there are any copies available
 
     Node* current = head;
     while (current != nullptr) {
         if (current->videoID == id) {
             if (current->numberOfCopies > 0){
                 showVideoDetails(id);
-                cout << "Availability: Available" << endl;
+                cout << "Availability: " << "\033[1m"  << "\033[32m" << "Available" << "\033[0m" << endl;
+                return;
             } else {
                 showVideoDetails(id);
-                cout << "Availability: Not Available" << endl;
+                cout << "Availability: " << "\033[1m" << "\033[31m" << "Not Available" << "\033[0m" << endl;
+                return;
             }
         } else {
             current = current->next;
@@ -167,7 +163,7 @@ void Video::isAvailable(int id) const {
 }
 
 
-std::string Video::getMovieTitle(int id) const {
+std::string Video::getMovieTitle(int id) const { // if movie exists, then return title
     Node* current = head;
     while (current!= nullptr) {
         if (current->videoID == id) {
@@ -179,12 +175,12 @@ std::string Video::getMovieTitle(int id) const {
     return "";
 }
 
-bool Video::isEmpty() const {
+bool Video::isEmpty() const { // check if there are no videos
     return head == nullptr;
 }
 
-void Video::initMovies(){
-    // TODO: Initialize the movies in the video library
+void Video::initMovies(){ // initialize the list of movies every start of the program; copies are set to 10 by default
+
 
     // initialize movie list
 
@@ -221,7 +217,7 @@ void Video::initMovies(){
     }
 }
 
-void Video::updateVideoList() const {
+void Video::updateVideoList() const { // update the text file
     ofstream MyFile("Video.txt");
 
     if (!MyFile.is_open()) {
@@ -248,4 +244,18 @@ void Video::updateVideoList() const {
     }
 
     MyFile.close();
+}
+
+bool Video::doesExist(int id) const{ // check if movie id exists
+    Node* current = head;
+    while (current!= nullptr) {
+        if (current->videoID == id) {
+            return true;
+        } else {
+            current = current->next;
+        }
+    }
+
+    cout << "\033[31m" << "\033[1m"  << "Unable to rent video. Video ID " << id << " does not exist." << "\033[0m" << endl;
+    return false;
 }

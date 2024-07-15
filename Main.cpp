@@ -119,9 +119,11 @@ int main() {
 
                     cout << "Enter Video ID to rent: ";
                     cin >> vidID;
-                    vid.rentVideo(vidID);
-                    customerRent.rentVideo(vidID, cusID);
-                    customerRent.updateCustomerRent();
+                    if (vid.doesExist(vidID)){
+                        vid.rentVideo(vidID);
+                        customerRent.rentVideo(vidID, cusID);
+                        customerRent.updateCustomerRent();
+                    }                    
                     cout << "Do you want to rent another video? (Y/N) ";
                     cin >> again;
                 } while (again == 'Y' || again == 'y');
@@ -172,7 +174,7 @@ int main() {
                 cout << green << bold << "[6] Check Video Availability\n" << reset;
                 cout << "Enter Video ID: ";
                 cin >> vidID;
-
+                
                 vid.isAvailable(vidID);
                 break;
             case 7: // customer maintenance
@@ -212,12 +214,19 @@ int main() {
                         
                         rented = customerRent.getRentedVideoIDs(cusID);
                         temp = rented;
-                        while (!temp.empty()){
-                            cout << temp.top() << " " << vid.getMovieTitle(temp.top());
+                        cout << endl;
+                        if (temp.empty()){
+                            cout << bold << red << "Customer " << cusID << " has not rented any videos yet.\n" << reset;
+                        } else {
+                            cout << bold << green << "Movies Rented by Customer " << cusID << ": \n" << reset;
+                            while (!temp.empty()){
+                            cout << "Video ID: " <<temp.top() << " | Movie Title: " << vid.getMovieTitle(temp.top()) << endl;
                             temp.pop();
                         }
 
                         cout << endl;
+                        }
+                        
 
                         break;
                     default:
