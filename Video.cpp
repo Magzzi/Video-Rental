@@ -5,6 +5,7 @@
 using namespace std;
 
 
+
 Video::Video() : head(nullptr) {}
 
 Video::~Video() {
@@ -117,7 +118,7 @@ void Video::showVideoDetails(int id) const {
         }
     }
 
-    cout << "Video not found.\n";
+    cout << "\033[31m" << "\033[1m" << "Video not found.\n" << "\033[0m";
 }
 
 void Video::displayAllVideos() const {
@@ -129,7 +130,7 @@ void Video::displayAllVideos() const {
         cout << "No videos available.\n";
         return;
     } else {
-        cout << "Videos: " << endl;
+        cout << endl << "\033[34m" << "\033[1m" <<"List of All Videos: " << "\033[0m" << endl;
         while (current != nullptr){
             cout << "Video ID: " << current->videoID << endl;
             cout << "Movie Title: " << current->title << endl;
@@ -177,4 +178,42 @@ std::string Video::getMovieTitle(int id) const {
 
 bool Video::isEmpty() const {
     return head == nullptr;
+}
+
+void Video::initMovies(){
+    // TODO: Initialize the movies in the video library
+
+    // initialize movie list
+
+    string initMovie[25][3] = { 
+    {"IT", "Box Office", "Horror"},
+    {"A Quiet Place", "Paramount Pictures", "Horror"},
+    {"Smile", "Paramount Pictures", "Horror"},
+    {"Unfriended", "Universal Pictures", "Horror"},
+    {"Cult of Chucky", "Universal Pictures", "Horror"},
+    {"Titanic", "20th Century Fox", "Romance"},
+    {"50 First Dates", "Happy Madison Productions", "Romance"},
+    {"The Notebook", "Gran Via Production", "Romance"},
+    {"About Time", "Working Title Films", "Romance"},
+    {"Sweet & Sour", "KT Hitel", "Romance"},
+    {"Interstellar", "Lynda Obst Production", "Sci-Fi"},
+    {"Super 8", "Bad Robot Production", "Sci-Fi"},
+    {"Inception", "Warner Bros. Pictures", "Sci-Fi"},
+    {"The 5th Wave", "Columbia Pictures", "Sci-Fi"},
+    {"Mad Max", "Kennedy Miller Productions", "Sci-Fi"},
+    {"Scott Pilgrim vs. The World", "Universal Pictures", "Action"},
+    {"The Dark Knight", "Warner Bros. Pictures", "Action"},
+    {"The Matrix", "Warner Bros. Pictures", "Action"},
+    {"Gladiator", "Warner Bros. Pictures", "Action"},
+    {"John Wick", "Thunder Road Pictures", "Action"},
+    {"Grown Ups", "Sony Pictures", "Comedy"},
+    {"Rush Hour", "New Line Cinema", "Comedy"},
+    {"The Three Stooges", "20th Century Studios", "Comedy"},
+    {"21 Jump Street", "Sony Pictures", "Comedy"},
+    {"Home Alone", "Warner Bros. Pictures", "Comedy"}
+    };
+
+    for (int i = 0; i < 25; i++){
+        insertVideo(initMovie[i][0], initMovie[i][1], initMovie[i][2], 10);
+    }
 }

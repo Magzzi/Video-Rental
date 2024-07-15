@@ -16,6 +16,8 @@ CustomerRent customerRent;
 
 int main() {
 
+
+    vid.initMovies();
     // To add colors for aesthetics
     const std::string reset = "\033[0m";
     const std::string bold = "\033[1m";

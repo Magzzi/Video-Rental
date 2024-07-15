@@ -25,7 +25,7 @@ public:
     ~Video();
 
 
-    
+    void initMovies(); // initialize a list of movies
     void insertVideo(const std::string &movieTitle, const std::string &movieGenre, const std::string &movieProd, int copies);
     void insertExistingVideo(int id, int copies);
     void rentVideo(int id);
