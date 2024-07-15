@@ -29,6 +29,14 @@ int main() {
     const std::string green = "\033[32m";
     const std::string yellow = "\033[33m";
     const std::string blue = "\033[34m";
+
+    // welcome message
+
+    cout << green << bold << "Welcome to our Video Rental System!" << reset << endl << endl;
+    cout << "-------------------------------------------------------------" << endl;
+    cout << "This system allows you to " << bold  << green << "manage videos " << reset << "and " << green << bold << "customers." << reset << endl;
+    cout << "You can " << bold << blue << "add new videos, rent videos, return videos, " << reset << "and " << blue  << bold << "more." << reset << endl;
+    cout << "-------------------------------------------------------------" << endl << endl;
     
     while (true){ 
         customerRent.updateCustomerRent();
