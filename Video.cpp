@@ -213,7 +213,7 @@ void Video::initMovies(){ // initialize the list of movies every start of the pr
     };
 
     for (int i = 0; i < 25; i++){
-        insertVideo(initMovie[i][0], initMovie[i][1], initMovie[i][2], 10);
+        insertVideo(initMovie[i][0], initMovie[i][2], initMovie[i][1], 10);
     }
 }
 

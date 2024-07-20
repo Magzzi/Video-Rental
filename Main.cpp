@@ -102,7 +102,7 @@ int main() {
                         cin >> numofcopies;
 
                         if (numofcopies > 0) {
-                            vid.insertVideo(title, prod, genre, numofcopies);
+                            vid.insertVideo(title, genre, prod, numofcopies);
                             break; // exit the loop if the input is positive
                         } else {
                             cout << red << bold <<"\nPlease enter a valid number.\n" << reset;
